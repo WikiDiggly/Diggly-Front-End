@@ -20,6 +20,7 @@
                             });
                         })
                         .catch(function(error) {
+                            $log.error(error);
                             $log.error("~~~~ Error: The id was not returned ~~~~");
                         });
                 };
@@ -28,13 +29,12 @@
                     directTo(event.searchString);
                 });
             },
-            link: function(scope, element, attrs) {
-                var searchResult_JSON;      // Search results recieved from ajax request and used to create the search result list
+            link: function(scope) {
                 var debounceTimeout = 200;  // Global timeout for debouce.
                 var searchText = "";        // Search string the user typed
                 var keyupCounter = 0;       // Counter to set debounce timeout
 
-                var selectedSearchResult = undefined;   // Final list element that is selected from the search results
+                var selectedSearchResult;   // Final list element that is selected from the search results
                 var selectedSearchString = "";          // The topic that is finally selected
 
                 $('body').on('keyup', '.searchBar', $.debounce(function(event) {
@@ -67,7 +67,8 @@
                                     $('.results').addClass('active');
                                 })
                                 .catch(function(error) {
-                                    console.log('Error happened in AJAX Request!!');
+                                    $log.error(error);
+                                    $log.error('Error in AJAX Request.');
                                 });
                         }
                     }
@@ -120,7 +121,7 @@
                     }
                 });
 
-                $('body').on('click', '.results li', function(event) {
+                $('body').on('click', '.results li', function() {
                     selectedSearchString = $(this).text();
                     $('.searchBar').val(selectedSearchString);
                     $('.results').removeClass('active');

@@ -3,6 +3,10 @@
     header {
         background: url('../assets/images/background.jpg');
         background-size: cover;
+
+        @media #{$small-only} {
+            padding: rem-calc(15px);
+        }
     }
 
     h1 {
@@ -10,7 +14,7 @@
         margin-bottom: 10vh;
         margin-top: rem-calc(20px);
         color: rgba(255,255,255, 0.76);
-        font-size: rem-calc(18px);
+        font-size: rem-calc(22px);
         font-weight: 100;
         letter-spacing: 1px;
     }
@@ -39,6 +43,10 @@
         background: -webkit-linear-gradient(#fbfcfd 0%, #eaeef7 100%);
         background: -o-linear-gradient(#fbfcfd 0%, #eaeef7 100%);
         background: linear-gradient(#fbfcfd 0%, #eaeef7 100%);
+
+        h3 {
+            margin: 0 rem-calc(15px) rem-calc(18px);
+        }
     }
 
     .interest {

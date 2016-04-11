@@ -4,16 +4,18 @@
     &__card {
 
         h3 {
-            padding-bottom: 5px;
+            padding-bottom: rem-calc(5px);
             border-bottom: 1px solid $subtle-grey;
         }
 
         p {
-            padding: 10px;
+            padding: rem-calc(10px);
         }
     }
 
     &__btns {
+        border-top: 1px solid $subtle-grey;
+        padding: rem-calc(20px) 0;
         text-align: right;
     }
 
@@ -21,17 +23,30 @@
         background: $light-orange;
         padding: rem-calc(12px) rem-calc(24px);
         box-shadow: $shadow-light;
+        color: #fff;
         transition: background .5s ease;
 
         &:focus,
         &:hover {
             border: none;
             background: $orange;
+            color: #d0bea2;
         }
 
         &:active {
             border-color: none;
         }
+    }
+
+    label {
+        margin-bottom: 3px;
+    }
+
+    input {
+        border: 0;
+        border-bottom: 1px solid $dark-grey;
+        color: $black;
+        margin-bottom: rem-calc(10px);
     }
 
 }

@@ -8,7 +8,7 @@
 
     /** @ngInject */
     function DigglyService(Restangular) {
-        var DIGGLY_BASEURL = "http://localhost:8000/diggly/";
+        var DIGGLY_BASEURL = "http://rack36.cs.drexel.edu:8000/diggly/";
         // Configs
         Restangular.setBaseUrl(DIGGLY_BASEURL);
 

@@ -30,16 +30,22 @@
                     <p>Export to an external file to save on your local computer.</p>
                 </div>
 
-                <div class="export__selection">
-                    <select name="exportSelection" ng-model="bookmarks.model.exportType" ng-change="bookmarks.action.export()" ng-options="extension.type as extension.label for extension in bookmarks.model.extensions">
-                        <option value="">Choose File Type</option>
-                    </select>
-                </div>
+                <form>
+                    <label for="fileName">File Name:</label>
+                    <input name="fileName" type="text" ng-model="bookmarks.model.fileName" />
+                    <div class="export__selection">
+                        <label for="exportSelection">Export Type:</label>
+                        <select name="exportSelection" ng-model="bookmarks.model.exportType" ng-change="bookmarks.action.export()" ng-options="extension.type as extension.label for extension in bookmarks.model.extensions">
+                            <option value="">Choose File Type</option>
+                        </select>
+                    </div>
 
 
-                <div class="export__btns">
-                    <a ng-href="{{ bookmarks.model.downloadUrl }}" class="export__btn" download>Export</a>
-                </div>
+                    <div class="export__btns">
+                        <a ng-href="{{ bookmarks.model.downloadUrl }}" class="export__btn" download="{{ bookmarks.model.fileName }}">Export</a>
+                    </div>
+
+                </form>
             </div>
         </article>
     </div>

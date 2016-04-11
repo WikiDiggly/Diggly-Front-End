@@ -49,7 +49,7 @@
 
     beforeEach(function() {
       $window.__history__ = mockHistory;
-    })
+    });
 
     it('should clear all history', function() {
       expect($window.__history__.length).toBe(4);

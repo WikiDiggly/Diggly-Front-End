@@ -1,7 +1,10 @@
 // History
 .history__card,
 .bookmarks__card {
-    min-height: 400px;
+    ul {
+        max-height: 550px;
+        overflow-y: scroll;
+    }
 
     li {
         padding: rem-calc(20px);
@@ -19,6 +22,10 @@
         a:first-child {
             margin-right: 30px;
         }
+    }
+
+    @media #{$medium-up} {
+        min-height: 600px;
     }
 }
 

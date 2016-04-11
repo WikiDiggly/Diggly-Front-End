@@ -16,18 +16,23 @@
                 background: transparent;
                 color: $inactive-grey;
                 text-transform: uppercase;
+                cursor: pointer;
+                transition: all .4s ease;
             }
 
             li {
+                margin-top: -1px;
                 &:hover a,
                 &:hover a:hover {
                     background: transparent;
                     color: $dark-grey;
+                    border-bottom: 1px solid $dark-grey;
                 }
 
                 &.active a {
                     background: transparent;
                     color: $active-grey;
+                    border-bottom: 1px solid $active-grey;
                 }
             }
         }
@@ -36,6 +41,14 @@
     h2 {
         color: $dark-grey;
         font-size: rem-calc(27px);
+
+        @media #{$medium} {
+            padding-left: 8px;
+        }
+
+        @media #{$small} {
+            padding-left: 8px;
+        }
     }
 
     .card {

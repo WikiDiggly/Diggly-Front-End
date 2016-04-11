@@ -74,6 +74,14 @@
         font-weight: 100;
         font-size: rem-calc(25px);
         letter-spacing: 2px;
+
+        @media #{$small-only} {
+            text-align: center;
+        }
+
+        @media #{$medium} {
+            padding-left: 12px;
+        }
     }
 }
 

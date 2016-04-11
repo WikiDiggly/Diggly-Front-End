@@ -22,8 +22,9 @@
 
     beforeEach(module('digglyFeProto'));
 
-    beforeEach(inject(function($controller, $rootScope, _$state_, _ExploreService_,
+    beforeEach(inject(function($controller, _$rootScope_, _$state_, _ExploreService_,
                                    _$window_, _$httpBackend_, _DigglyService_, _Restangular_) {
+       $rootScope = _$rootScope_;
        $scope = $rootScope.$new();
        vm = $controller('VisualController', {
           $scope: $scope

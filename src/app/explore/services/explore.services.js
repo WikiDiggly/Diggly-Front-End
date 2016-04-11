@@ -6,7 +6,7 @@
         .factory('ExploreService', ExploreService);
 
     /** @ngInject */
-    function ExploreService ($window) {
+    function ExploreService ($window, $rootScope) {
         var actions = {
             /**
              * Clears history in window object
@@ -15,6 +15,7 @@
             clearHistory: function () {
                 var arrayLen = $window.__history__.length;
                 $window.__history__ = _.drop($window.__history__, arrayLen);
+                $rootScope.$emit("notify:service", "History cleared.", true);
             },
             /**
              * Clear bookmarks in window object
@@ -23,6 +24,7 @@
             clearBookmarks: function () {
                 var arrayLen = $window.__bookmarks__.length;
                 $window.__bookmarks__ = _.drop($window.__history__, arrayLen);
+                $rootScope.$emit("notify:service", "Bookmarks cleared.", true);
             },
             /**
              * Removes a bookmark item from the bookmark list
@@ -57,11 +59,13 @@
 
                 var bookmarks = $window.__bookmarks__;
 
-                // If it's empty ==> Push
-                if (bookmarks.length === 0) $window.__bookmarks__.push(item);
-
-                // If it's unique ==> Push
-                if (_.findIndex(bookmarks, check) === -1) $window.__bookmarks__.push(item);
+                // If it's empty or unique ==> Push
+                if (bookmarks.length === 0 || _.findIndex(bookmarks, check) === -1) {
+                    $rootScope.$emit("notify:service", item.article_title + " has been added to your bookmarks.", false);
+                    $window.__bookmarks__.push(item);
+                } else {
+                    $rootScope.$emit("notify:service", item.article_title + " already exists in your bookmarks.", true);
+                }
             },
 
             /**
@@ -69,6 +73,9 @@
              * @return {array} array of history items
              */
             getHistory: function () {
+                if (!$window.__history__) {
+                    $window.__history__ = [];
+                }
                 return $window.__history__;
             },
 
@@ -77,6 +84,9 @@
              * @return {array} array of bookmark items
              */
             getBookmarks: function () {
+                if (!$window.__bookmarks__) {
+                    $window.__bookmarks__ = [];
+                }
                 return $window.__bookmarks__;
             }
         };
@@ -89,7 +99,7 @@
             getHistory: actions.getHistory,
             addBookmark: actions.addBookmark,
             getBookmarks: actions.getBookmarks
-        }
+        };
     }
 
 })();

@@ -1,7 +1,12 @@
 <section class="visual">
     <div class="medium-8 small-12 columns">
         <section ng-cloak class="visualizer card">
-            <diggly-visual class="visualizer-container" data="visual.model.data" on-click="visual.action.onClick(item)"></diggly-visual>
+            <div class="visual__loader" ng-show="loading">
+                <span class="visual__svg" ng-include src="'app/explore/views/partials/loader.html'"></span>
+            </div>
+            <div ng-show="!loading">
+                <div diggly-visual class="visualizer-container" data="visual.model.data" on-click="visual.action.onClick(item)"></div>
+            </div>
         </section>
     </div>
 
@@ -36,6 +41,10 @@
                             </div>
                         </li>
                     </ul>
+                </div>
+
+                <div class="buttons">
+                    <a class="visual__history-clear" ng-click="visual.action.clearHistory()"><i class="material-icons">delete_sweep</i></a>
                 </div>
             </div>
         </article>

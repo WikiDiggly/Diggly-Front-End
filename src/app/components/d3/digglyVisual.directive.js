@@ -13,7 +13,7 @@
         data: '=',
         onClick: '&'
       },
-      link: function(scope, element, attrs) {
+      link: function(scope, element) {
         var m = scope.model = {
           d3Data: {
             nodes: '',
@@ -22,7 +22,6 @@
         };
 
         d3Service.d3().then(function(d3) {
-
             // D3 Code here after it's been loaded dynamically
             var svg = d3.select(element[0])
               .append('svg')
@@ -39,20 +38,37 @@
             scope.$watch(function(){
               return angular.element($window)[0].innerWidth;
             }, function() {
-              scope.render(scope.data);
-            })
+              if (angular.element($window)[0].innerWidth < 1024) {
+                scope.updateDim();
+              }
+            });
 
             // Watches for scope.data change, and renders the SVG
             scope.$watch('data', function(newVal, oldVal) {
-              scope.render(newVal);
-            }, true);
+              if (oldVal !== newVal) {
+                scope.render(newVal);
+              }
+            }, false);
+
+            var baseHeight = $('.visualizer').height();
+            var baseWidth = $('.visualizer').width();
+            var linkDistance = Math.round(baseWidth / 4);
+
+            scope.updateDim = _.debounce(function () {
+              baseWidth = $('.visualizer').width();
+              baseHeight = $('.visualizer').height();
+              linkDistance = Math.round(baseWidth / 4);
+              scope.render(scope.data);
+            }, 300);
 
             scope.render = function (data) {
               // Clear out SVGs first
               svg.selectAll('*').remove();
 
               // When nothing exist, return
-              if (!data) return;
+              if (!data) {
+                return;
+              }
 
               // Set up Data
               m.d3Data.nodes = createNodeData(data);
@@ -67,8 +83,9 @@
                 .force()
                 .nodes(m.d3Data.nodes)
                 .links(m.d3Data.edges)
-                .size([500, 500])
-                .linkDistance(130)
+                // not sure why there is an offset on height?
+                .size([baseWidth, baseHeight])
+                .linkDistance(linkDistance)
                 .charge([-500])
                 .theta(0.1)
                 .gravity(0.05)
@@ -80,7 +97,9 @@
                 .data(m.d3Data.edges)
                 .enter()
                 .append('line')
-                .attr('id',function(d,i) { return 'edge' + i })
+                .attr('id', function(d,i) {
+                  return 'edge' + i;
+                })
                 .attr('marker-end','url(#marker_circle)')
                 .style('stroke','#ccc')
                 .style('pointer-events', 'none');
@@ -91,8 +110,8 @@
                 .enter()
                 .append('circle')
                 .attr({
-                  'r': function(d, i) {
-                      return d.score * 40 // TODO: Find a better number or dynamic number based on sizing
+                  'r': function(d) {
+                      return d.score * 40; // TODO: Find a better number or dynamic number based on sizing
                   },
                   'class': function(d, i) {
                       return 'node-' + i;
@@ -101,16 +120,14 @@
                 .style('fill', function(d, i) {
                   return colors(i);
                 })
-                .style('cursor', function(d, i) {
-                  return (i === 0) ? 'move' : 'pointer';
-                })
                 .call(force.drag)
                 .on('click', function(d, i) {
                   if (i !== 0) {
                     var selectedId = d.target_id;
-                    scope.onClick({item: selectedId})
+                    scope.onClick({item: selectedId});
                   }
                 });
+
 
               var nodelabels = svg
                 .selectAll('.nodelabel')
@@ -128,6 +145,12 @@
                     return 'label-' + i;
                   },
                   'stroke': 'black'
+                })
+                .on('click', function(d, i) {
+                  if (i !== 0) {
+                    var selectedId = d.target_id;
+                    scope.onClick({item: selectedId});
+                  }
                 })
                 .text(function(d) {
                   return d.title;
@@ -173,9 +196,9 @@
               edgelabels
                 .append('textPath')
                 .attr('xlink:href',function(d,i) {
-                  return '#edgepath'+i
+                  return '#edgepath' + i;
                 })
-                .style("pointer-events", "none")
+                .style("pointer-events", "none");
 
               svg
                 .append('defs')
@@ -199,16 +222,16 @@
               var tick = function () {
                 edges
                   .attr({
-                    "x1": function(d){return d.source.x;},
-                    "y1": function(d){return d.source.y;},
-                    "x2": function(d){return d.target.x;},
-                    "y2": function(d){return d.target.y;}
+                    "x1": function(d) { return d.source.x; },
+                    "y1": function(d) { return d.source.y; },
+                    "x2": function(d) { return d.target.x; },
+                    "y2": function(d) { return d.target.y; }
                   });
 
                 nodes
                   .attr({
-                    "cx": function (d) { return d.x },
-                    "cy": function (d) { return d.y }
+                    "cx": function(d) { return d.x; },
+                    "cy": function(d) { return d.y; }
                   });
 
                 nodelabels
@@ -218,13 +241,12 @@
                 edgepaths
                   .attr('d', function(d) {
                     var path='M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y;
-                    return path
+                    return path;
                   });
               };
 
-              force.on("tick", tick)
-
-              } // End of Scope Render
+              force.on("tick", tick);
+            }; // End of Scope Render
         });
       }
     };
@@ -269,10 +291,6 @@
       });
 
       return edges;
-    }
-
-    var createIndexLabel = function (data, index, label) {
-      return label + i
     };
 
     return directive;

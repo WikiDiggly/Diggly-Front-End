@@ -3,8 +3,11 @@
 .visual {
     .history-card {
         &__list {
-            max-height: 128px;
+            height: 152px;
             overflow-y: scroll;
+            border: 1px solid $subtle-grey;
+            border-radius: 4px;
+            margin-bottom: 10px;
         }
         ul {
             margin-left: 0;
@@ -26,10 +29,22 @@
             a:first-child {
                 margin-right: rem-calc(10px);
             }
+
+            a.visual__history-clear {
+                margin-right: 0;
+            }
         }
 
         .material-icons {
             font-size: rem-calc(19px);
+        }
+
+        @media #{$medium-up} {
+            min-height: 222px;
+        }
+
+        @media #{$small-only} {
+            min-height: 250px;
         }
     }
 
@@ -62,25 +77,50 @@
             margin-top: rem-calc(18px);
         }
     }
+
+    &__loader {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+
+        svg {
+            position: relative;
+            left: 30%;
+            top: 0;
+        }
+    }
+
 }
 
 .visualizer {
     height: 100%;
     width: 100%;
-    min-height: 500px;
     margin-left: -14px; // left to override foundation padding
 
     @media #{$small-only} {
         margin-left: 0;
+        min-height: 437px;
     }
 
-    &-container {
-        height: 100%;
-        min-height: 500px;
+    @media #{$medium-up} {
+        min-height: 600px;
     }
 
+
+    &.card {
+        padding: 0;
+    }
+
+
+    &-container,
     svg {
-        min-height: 500px;
+        height: 100%;
+        min-height: 600px;
+
+        @media #{$small-only} {
+            min-height: 437px;
+        }
     }
 
     // labels
@@ -89,12 +129,42 @@
             font-weight: 100;
             letter-spacing: 1px;
             stroke: #353535;
+            cursor: pointer;
+
+            &:hover,
+            &:focus {
+                opacity: 0.6;
+            }
+        }
+
+        .node-#{$i} {
+            cursor: pointer;
+
+            &:hover,
+            &:focus {
+                opacity: 0.6;
+            }
         }
     }
 
     .label-0 {
         stroke: $dark-purple;
         font-weight: 500;
+        cursor: default;
+
+        &:hover,
+        &:focus {
+            opacity: 1;
+        }
+    }
+
+    .node-0 {
+        cursor: move;
+
+        &:hover,
+        &:focus {
+            opacity: 1;
+        }
     }
 }
 

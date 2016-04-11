@@ -1,0 +1,37 @@
+// notification
+
+.notify__message {
+    position: absolute;
+    margin-top: -40px;
+    z-index: 2;
+    background: $green;
+    border: 1px solid $subtle-grey;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    padding: rem-calc(15px);
+    transition: margin-top 1s ease, opacity .5s ease-in;
+
+    p {
+        font-size: rem-calc(17px);
+        color: #6E8C4A;
+        margin-bottom: 0;
+        padding: rem-calc(10px) 0;
+    }
+
+    &.show {
+        visibility: visible;
+        display: block;
+        opacity: 1;
+        height: initial;
+        margin-top: -20px;
+    }
+
+    &.error {
+        background: $red;
+
+        p {
+            color: #B15555;
+        }
+    }
+}
