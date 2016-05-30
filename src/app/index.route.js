@@ -28,6 +28,18 @@
         controller: 'VisualController',
         controllerAs: 'visual'
       })
+      .state('explore.visual.text', {
+        parent: 'explore.visual',
+        templateUrl: 'app/explore/views/partials/text.html',
+        controller: 'VisualController',
+        controllerAs: 'visual'
+      })
+      .state('explore.visual.visualizer', {
+        parent: 'explore.visual',
+        templateUrl: 'app/explore/views/partials/visualizer.html',
+        controller: 'VisualController',
+        controllerAs: 'visual'
+      })
       .state('explore.history', {
         parent: 'explore',
         url: '/history',

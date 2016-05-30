@@ -81,7 +81,7 @@
     &__loader {
         position: absolute;
         height: 100%;
-        width: 100%;
+        width: 90%;
         z-index: 1;
 
         svg,
@@ -116,14 +116,26 @@
 
     @media #{$medium-up} {
         min-height: 670px;
-        width: calc(100% + 14px);
-    }
+        width: 95%;
+        float: left;
 
+        &__buttons {
+            float: right;
+        }
+    }
 
     &.card {
         padding: 0;
     }
 
+    &__buttons {
+        width: 5%;
+
+        ul {
+            margin: 0;
+            list-style-type: none;
+        }
+    }
 
     &-container,
     svg {

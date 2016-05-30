@@ -1,11 +1,21 @@
 <section class="visual">
     <div class="medium-8 small-12 columns">
+        <aside class="visualizer__buttons">
+            <ul>
+                <li>
+                    <a ui-sref="explore.visual.visualizer">V</a>
+                </li>
+                <li>
+                    <a ui-sref="explore.visual.text">T</a>
+                </li>
+            </ul>
+        </aside>
         <section ng-cloak class="visualizer card">
             <div class="visual__loader" ng-show="loading">
-                <img class="visual__svg" src="assets/ripple.svg"></span>
+                <img class="visual__svg" src="assets/ripple.svg">
             </div>
             <div ng-show="!loading">
-                <div diggly-visual class="visualizer-container" data="visual.model.data" on-click="visual.action.onClick(item)"></div>
+                <ui-view></ui-view>
             </div>
         </section>
     </div>
