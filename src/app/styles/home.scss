@@ -14,7 +14,7 @@
         margin-bottom: 10vh;
         margin-top: rem-calc(20px);
         color: rgba(255,255,255, 0.76);
-        font-size: rem-calc(22px);
+        font-size: rem-calc(30px);
         font-weight: 100;
         letter-spacing: 1px;
     }
@@ -124,4 +124,19 @@
         padding-left: rem-calc(15px);
         padding-right: rem-calc(15px);
     }
+}
+
+.left-circle,
+.right-circle {
+    display: inline-block;
+    border: 2px solid;
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    vertical-align: middle;
+}
+
+.right-circle {
+    margin-left: -14px;
+    margin-right: 5px;
 }

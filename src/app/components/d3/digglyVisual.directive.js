@@ -101,7 +101,8 @@
                   return 'edge' + i;
                 })
                 .attr('marker-end','url(#marker_circle)')
-                .style('stroke','#ccc')
+                .style('stroke', '#989898')
+                .style('stroke-width', '2')
                 .style('pointer-events', 'none');
 
               var nodes = svg
