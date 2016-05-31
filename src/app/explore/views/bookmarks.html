@@ -4,19 +4,21 @@
             <h2>Saved Bookmarks</h2>
 
             <div class="buttons">
-                <a ng-click="bookmarks.action.clearBookmarks()"><i class="material-icons">delete_sweep</i></a>
+                <a ng-click="bookmarks.action.clearBookmarks()" class="sweep"><i class="material-icons">delete_sweep</i></a>
             </div>
         </div>
         <ul>
             <li ng-repeat="bookmark in bookmarks.model.bookmarks">
-                <h4>{{ bookmark.article_title}}</h4>
-                <p>{{ bookmark.summary | limitTo: 1000 }} ...</p>
+                <div class="top-row">
+                    <h4>{{ bookmark.article_title}}</h4>
+                    <div class="option-wrap">
+                        <a href="{{ bookmark.wiki_link }}" target="_blank"><i class="material-icons">launch</i></a>
 
-                <div class="option-wrap">
-                    <a href="{{ bookmark.wiki_link }}" target="_blank"><i class="material-icons">launch</i>Go to Wikipedia</a>
-
-                    <a ng-click="bookmarks.action.removeItem(bookmark)"><i class="material-icons">remove_circle_outline</i>Remove Item</a>
+                        <a ng-click="bookmarks.action.removeItem(bookmark)"><i class="material-icons">remove_circle_outline</i></a>
+                    </div>
                 </div>
+
+                <p>{{ bookmark.summary | limitTo: 1000 }} ...</p>
             </li>
         </ul>
     </article>

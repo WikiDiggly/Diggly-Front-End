@@ -4,19 +4,21 @@
             <h2>Previously Viewed</h2>
 
             <div class="buttons">
-                <a ng-click="history.action.clearHistory()"><i class="material-icons">delete_sweep</i></a>
+                <a ng-click="history.action.clearHistory()" class="sweep"><i class="material-icons">delete_sweep</i></a>
             </div>
         </div>
         <ul>
             <li ng-repeat="topic in history.model.history">
-                <h4>{{ topic.article_title}}</h4>
-                <p>{{ topic.summary | limitTo: 300 }} ...</p>
+                <div class="top-row">
+                    <h4>{{ topic.article_title}}</h4>
+                    <div class="option-wrap">
+                        <a href="{{ topic.wiki_link }}" target="_blank"><i class="material-icons">launch</i></a>
 
-                <div class="option-wrap">
-                    <a href="{{ topic.wiki_link }}" target="_blank"><i class="material-icons">launch</i>Go to Wikipedia</a>
-
-                    <a ng-click="history.action.removeItem(topic)"><i class="material-icons">remove_circle_outline</i>Remove Item</a>
+                        <a ng-click="history.action.removeItem(topic)"><i class="material-icons">remove_circle_outline</i></a>
+                    </div>
                 </div>
+
+                <p>{{ topic.summary | limitTo: 300 }} ...</p>
             </li>
         </ul>
     </article>

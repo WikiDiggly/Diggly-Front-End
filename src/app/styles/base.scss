@@ -2,6 +2,8 @@
 .card {
     background: white;
     border-radius: 8px;
+    border: 1px solid #dedede;
+    border-bottom: 2px solid #c3c3c3;
     box-shadow: 2px 4px 6px 1px rgba(0,0,0,.09);
     padding: rem-calc(20px);
 
@@ -114,5 +116,11 @@ input[type="text"] {
 .top-bar {
     .results {
         margin-top: 8.5px; // foundation positioning of top bar
+    }
+}
+
+.sweep {
+    i {
+        color: $danger !important;
     }
 }

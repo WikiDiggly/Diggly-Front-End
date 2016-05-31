@@ -17,22 +17,22 @@
                 color: $inactive-grey;
                 text-transform: uppercase;
                 cursor: pointer;
-                transition: all .4s ease;
+                transition: all .1s ease;
             }
 
             li {
-                margin-top: -1px;
+                margin-top: -2px;
                 &:hover a,
                 &:hover a:hover {
                     background: transparent;
-                    color: $dark-grey;
-                    border-bottom: 1px solid $dark-grey;
+                    color: $hyper-teal;
+                    border-bottom: 2px solid $hyper-teal;
                 }
 
                 &.active a {
                     background: transparent;
-                    color: $active-grey;
-                    border-bottom: 1px solid $active-grey;
+                    color: $hyper-teal;
+                    border-bottom: 2px solid $hyper-teal;
                 }
             }
         }
@@ -54,11 +54,12 @@
     .card {
         h3 {
             font-size: rem-calc(20px);
+            color: #5e5e5f;
         }
 
         h2 {
             font-weight: 400;
-            color: $blue;
+            color: #5e5e5f;
             display: inline-block;
         }
 

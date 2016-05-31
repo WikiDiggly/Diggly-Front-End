@@ -45,7 +45,7 @@
 
             // Watches for scope.data change, and renders the SVG
             scope.$watch('data', function(newVal, oldVal) {
-              if (oldVal !== newVal) {
+              if (oldVal.article_title !== newVal.article_title) {
                 scope.render(newVal);
               }
             }, false);
@@ -76,7 +76,7 @@
 
               var colors = d3
                 .scale
-                .category10();
+                .category20c();
 
               var force = d3
                 .layout
@@ -89,6 +89,7 @@
                 .charge([-500])
                 .theta(0.1)
                 .gravity(0.05)
+                .alpha(0.08)
                 .on('tick', tick)
                 .start();
 
@@ -297,6 +298,10 @@
 
       _.map(data.linked_topics, function (topic) {
          topic.score *= relativeFactor;
+         // If it is super low, we will set at a minimum of .05
+         if (topic.score < .05) {
+          topic.score = .05
+         }
       });
 
       var nodes = _.union(createMainNode(data), data.linked_topics);

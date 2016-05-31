@@ -10,8 +10,23 @@
         padding: rem-calc(20px);
     }
 
+    p {
+        clear: both;
+        padding-top: 10px;
+    }
+
+    .top-row {
+        h4 {
+            float: left;
+        }
+
+        .option-wrap {
+            float: right;
+            text-align: right;
+        }
+    }
+
     .option-wrap {
-        text-align: right;
 
         .material-icons {
             position: relative;
@@ -20,7 +35,7 @@
         }
 
         a:first-child {
-            margin-right: 30px;
+            margin-right: 10px;
         }
     }
 
@@ -29,3 +44,8 @@
     }
 }
 
+.history__card {
+    .option-wrap {
+        margin-right: -20px;
+    }
+}
